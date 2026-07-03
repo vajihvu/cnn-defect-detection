@@ -9,10 +9,10 @@ data_processed/
 dataset/
 
 # Saved model checkpoints
-saved_models/
-*.keras
-*.pth
-*.h5
+# saved_models/
+# *.keras
+# *.pth
+# *.h5
 
 # Generated evaluation plots
 *.png

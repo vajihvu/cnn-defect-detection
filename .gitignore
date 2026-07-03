@@ -1,0 +1,25 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Large image datasets
+metal_nut/
+data_processed/
+dataset/
+
+# Saved model checkpoints
+saved_models/
+*.keras
+*.pth
+*.h5
+
+# Generated evaluation plots
+*.png
+
+# IDE and notebook configurations
+.ipynb_checkpoints/
+.vscode/
+.idea/
+.gemini/
+antigravity-ide/

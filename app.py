@@ -8,9 +8,21 @@ st.set_page_config(page_title="Defect Detection", layout="centered")
 st.title("⚙️ Aircraft Component Defect Detection (Keras)")
 st.write("Upload an image of an aerospace component to check for surface defects (e.g. scratches, bending, color anomalies).")
 
+import urllib.request
+
 @st.cache_resource
 def load_model_keras(model_name="resnet"):
     model_path = f"saved_models/{model_name}_best.keras"
+    if not os.path.exists(model_path):
+        os.makedirs("saved_models", exist_ok=True)
+        url = f"https://raw.githubusercontent.com/vajihvu/cnn-defect-detection/release/saved_models/{model_name}_best.keras"
+        with st.spinner(f"Downloading model weights ({model_name}) from GitHub... This will only happen once."):
+            try:
+                urllib.request.urlretrieve(url, model_path)
+            except Exception as e:
+                st.error(f"Failed to download model weights from {url}: {e}")
+                return None, False
+                
     if os.path.exists(model_path):
         try:
             model = tf.keras.models.load_model(model_path)

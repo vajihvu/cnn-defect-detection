@@ -13,7 +13,7 @@ pinned: false
 This project builds a Convolutional Neural Network (CNN) based visual inspection system to detect surface defects on aerospace and manufacturing components. 
 
 It was built to demonstrate a transition from classical ML techniques to Deep Learning, specifically showcasing:
-1. **Transfer Learning**: Utilizing a ResNet18 backbone pre-trained on ImageNet to extract complex features, proving more effective than training a CNN from scratch on limited data.
+1. **Transfer Learning**: Utilizing an EfficientNetB0 backbone pre-trained on ImageNet to extract complex features, proving more effective than training a CNN from scratch on limited data.
 2. **Handling Class Imbalance**: In real-world manufacturing, defects are rare. This project addresses the severe imbalance between "good" and "defect" samples using weighted loss functions (`BCEWithLogitsLoss(pos_weight)`) and data augmentation.
 3. **Targeted Evaluation Metrics**: Moving beyond raw accuracy, the model is evaluated on **Precision and Recall** specifically for the minority 'defect' class, mirroring evaluation strategies used in fraud detection and other imbalanced domains.
 
@@ -33,11 +33,11 @@ This will create a `dataset/` directory with `train/` and `val/` splits, separat
 
 ## Training
 
-You can train either a simple baseline CNN built from scratch, or the industry-standard ResNet18 transfer learning model.
+You can train either a simple baseline CNN built from scratch, or the industry-standard EfficientNetB0 transfer learning model.
 
-To train the ResNet model:
+To train the EfficientNet model:
 ```bash
-python train.py --model resnet --epochs 10
+python train.py --model efficientnet --epochs 10
 ```
 
 To train the Baseline model (for comparison):
@@ -52,7 +52,7 @@ The script automatically calculates class weights to penalize the model more hea
 To evaluate the trained model on the validation set and generate Precision/Recall metrics, a Confusion Matrix, and a PR Curve:
 
 ```bash
-python evaluate.py --model resnet
+python evaluate.py --model efficientnet
 ```
 
 *(Note: In an industrial setting, minimizing False Negatives—missing a defect—is critical, so we aim for high Recall).*

@@ -11,11 +11,13 @@ st.write("Upload an image of an aerospace component to check for surface defects
 import urllib.request
 
 @st.cache_resource
-def load_model_keras(model_name="resnet"):
+def load_model_keras(model_name="efficientnet"):
     model_path = f"saved_models/{model_name}_best.keras"
     if not os.path.exists(model_path):
         os.makedirs("saved_models", exist_ok=True)
-        url = f"https://raw.githubusercontent.com/vajihvu/cnn-defect-detection/release/saved_models/{model_name}_best.keras"
+        # Fallback to download 'resnet' weights from GitHub release if local 'efficientnet' doesn't exist
+        download_name = "resnet" if model_name == "efficientnet" else model_name
+        url = f"https://raw.githubusercontent.com/vajihvu/cnn-defect-detection/release/saved_models/{download_name}_best.keras"
         with st.spinner(f"Downloading model weights ({model_name}) from GitHub... This will only happen once."):
             try:
                 urllib.request.urlretrieve(url, model_path)
@@ -33,10 +35,10 @@ def load_model_keras(model_name="resnet"):
     else:
         return None, False
 
-model_choice = st.sidebar.selectbox("Select Model", ["resnet", "baseline"], index=0)
+model_choice = st.sidebar.selectbox("Select Model", ["efficientnet", "baseline"], index=0)
 st.sidebar.markdown("""
 **Models:**
-- `resnet`: Transfer learning from EfficientNetB0 (Industry Standard)
+- `efficientnet`: Transfer learning from EfficientNetB0 (Industry Standard)
 - `baseline`: Simple 3-layer CNN from scratch
 """)
 

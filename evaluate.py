@@ -76,7 +76,7 @@ def evaluate_model(model_name, threshold=0.5):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model', type=str, default='resnet', choices=['baseline', 'resnet'])
+    parser.add_argument('--model', type=str, default='efficientnet', choices=['baseline', 'efficientnet'])
     args = parser.parse_args()
     
     evaluate_model(args.model)

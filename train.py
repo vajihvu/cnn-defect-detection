@@ -19,7 +19,7 @@ def train_model(model_name, epochs=10, batch_size=32, lr=0.001):
 
     if model_name == 'baseline':
         model = BaselineCNN()
-    elif model_name == 'resnet':
+    elif model_name == 'efficientnet':
         model = TransferLearningCNN(freeze_backbone=True)
     else:
         raise ValueError("Invalid model name")
@@ -55,7 +55,7 @@ def train_model(model_name, epochs=10, batch_size=32, lr=0.001):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model', type=str, default='resnet', choices=['baseline', 'resnet'])
+    parser.add_argument('--model', type=str, default='efficientnet', choices=['baseline', 'efficientnet'])
     parser.add_argument('--epochs', type=int, default=10)
     args = parser.parse_args()
     
